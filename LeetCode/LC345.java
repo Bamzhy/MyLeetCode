@@ -1,4 +1,4 @@
-package LeetCode;
+package com.bamzhy.My_LeetCode.LeetCode;
 
 public class LC345 {
     public static void main(String[] args) {

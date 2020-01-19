@@ -1,4 +1,4 @@
-package LeetCode;
+package com.bamzhy.My_LeetCode.LeetCode;
 
 public class LC209 {
     public int minSubArrayLen(int s, int[] nums) {

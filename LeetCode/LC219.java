@@ -1,33 +1,40 @@
-package LeetCode;
+package com.bamzhy.My_LeetCode.LeetCode;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * 给定一个整数数组和一个整数 k，判断数组中是否存在两个不同的索引 i 和 j，
  * 使得 nums [i] = nums [j]，并且 i 和 j 的差的绝对值最大为 k。
  */
 public class LC219 {
-    public static void main(String[] args) throws IOException {
-        InputStream input = new FileInputStream("C:\\Users\\bam\\Desktop\\LeetCode\\src\\Tools\\textFile");
-        int available = input.available();
-        byte[] bytes = new byte[available];
-        input.read(bytes);
-        String byteString = new String(bytes);
-        String[] split = byteString.split(",");
-        int[] nums = new int[split.length];
-        for (int i = 0; i < split.length; i++) {
-            nums[i] = Integer.valueOf(split[i]);
-        }
-        System.out.println(Arrays.toString(nums));
-        System.out.println(new LC219().containsNearbyDuplicate(nums, 3500));
-    }
 
     public boolean containsNearbyDuplicate(int[] nums, int k) {
+        HashSet<Integer> record = new HashSet<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (record.contains(nums[i])) {
+                return true;
+            }
+            record.add(nums[i]);
+            if (record.size() == k + 1) {
+                record.remove(nums[i - k]);
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) throws IOException {
+        int[] nums = {1, 2, 3, 1, 2, 3};
+        int k = 2;
+        System.out.println(new LC219().containsNearbyDuplicate(nums, k));
+    }
+
+    // time complexity is too high
+    public boolean containsNearbyDuplicateBamzhy(int[] nums, int k) {
         if (nums == null) return false;
 
         HashMap<Integer, Integer> map = new HashMap<>();

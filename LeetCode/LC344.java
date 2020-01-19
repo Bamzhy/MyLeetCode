@@ -1,4 +1,4 @@
-package LeetCode;
+package com.bamzhy.My_LeetCode.LeetCode;
 
 public class LC344 {
     public void reverseString(char[] s) {
