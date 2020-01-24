@@ -7,7 +7,7 @@ import com.bamzhy.My_LeetCode.ListNode;
  * You may not modify the values in the list's nodes, only nodes itself may be changed.
  */
 public class LC24 {
-    public ListNode swapPairs(ListNode head) {
+    public ListNode swapPairsBest(ListNode head) {
         ListNode dummyHead = new ListNode(0);
         dummyHead.next = head;
         ListNode p = dummyHead;
@@ -25,5 +25,29 @@ public class LC24 {
             p = node1;
         }
         return head;
+    }
+
+    public ListNode swapPairs(ListNode head) {
+        if (head == null) return null;
+        ListNode dummyHead = new ListNode(0);
+        dummyHead.next = head;
+
+        ListNode pre = dummyHead;
+        ListNode cur = dummyHead.next;
+        ListNode next = dummyHead.next.next;
+
+        while (next.next != null) {
+            pre.next = next;
+            cur.next = next.next;
+            next.next = cur;
+
+            next = cur;
+            cur = pre.next;
+
+            pre = pre.next.next;
+            cur = cur.next.next;
+            next = next.next.next;
+        }
+        return dummyHead.next;
     }
 }
