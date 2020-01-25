@@ -1,6 +1,5 @@
 package com.bamzhy.My_LeetCode.LeetCode;
 
-import com.bamzhy.My_LeetCode.ListNode;
 import com.bamzhy.My_LeetCode.TreeNode;
 
 import java.util.ArrayList;
