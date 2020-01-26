@@ -91,7 +91,7 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        Graph graph = new Graph("/home/bamzhy/Desktop/LeetCode/src/com/bamzhy/My_LeetCode/File/g.txt");
+        Graph graph = new Graph("g.txt");
         System.out.println(graph.toString());
         System.out.println(graph.adj(2));
         System.out.println(graph.degree(2));
