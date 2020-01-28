@@ -58,10 +58,10 @@ public class LC82 {
 //        System.out.println(new LC82().deleteDuplicates(node1).toString());
 
         System.out.println(" ");
-        int[] arr2 = {1, 2, 2, 2, 3, 3, 4, 5, 5, 6};
+        int[] arr2 = {1, 1, 2, 2, 2, 3, 3, 4, 5, 5, 6};
         ListNode node2 = new ListNode(arr2);
         System.out.println(node2.toString());
-        System.out.println(new LC82().deleteDuplicatesLeetCode(node2).toString());
+        System.out.println(new LC82().deleteDuplicates2(node2).toString());
     }
 
     // quick and slow pointer
@@ -83,5 +83,32 @@ public class LC82 {
             fast = fast.next;
         }
         return dummyHead.next;
+    }
+
+    public ListNode deleteDuplicates2(ListNode head) {
+        if (head == null) return null;
+        ListNode cur = new ListNode(Integer.MAX_VALUE);
+        cur.next = head;
+        ListNode res = cur;
+
+        while (cur != null && cur.next != null) {
+            ListNode next = cur.next;
+            while (next.next != null) {
+                if (cur.val != next.val && next.val != next.next.val) {
+                    cur.next = next;
+                    break;
+                } else {
+                    cur = cur.next;
+                    next = next.next;
+                }
+            }
+            if (cur.val == next.val)
+                cur.next = null;
+            else
+                cur.next =  next;
+            cur = cur.next;
+        }
+//        return head;
+        return res.next;
     }
 }
