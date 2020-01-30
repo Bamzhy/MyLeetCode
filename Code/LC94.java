@@ -19,7 +19,6 @@ public class LC94 {
             this.node = node;
         }
     }
-
     public List<Integer> inorderTraversalNoRecursive(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<>();
         Stack<Command> stack = new Stack<>();
