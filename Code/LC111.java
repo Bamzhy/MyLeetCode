@@ -9,10 +9,48 @@ import java.util.LinkedList;
  * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
  */
 public class LC111 {
-    // maybe we can't use Recursive method
-    public int minDepthRecursive(TreeNode root) {
-        return 0;
+    /* I cannot pass the test case [1,2] because this answer didn't cover situation 2
+
+       1 When the root node didn't have any child nodes,return 1
+       2 the root only have one child node, return the childNode 's depth +1
+       3 the root have two child nodes, return the min value of the two trees' depth +1
+
+     */
+    public int minDepthFinal(TreeNode root) {
+        if (root == null) return 0;
+
+        // 1
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        int left = minDepthFinal(root.left);
+        int right = minDepthFinal(root.right);
+
+        // 2
+        // 当前节点左右子树有一个为空时，返回的应是非空子树的最小深度，而不是空子树深度0
+        // 若返回0相当于把当前节点认为成叶子节点，与此节点有非空子树矛盾。
+        if (root.left == null || root.right == null) {
+            return left + right + 1;
+        }
+        //3
+        return Math.min(left, right) + 1;
     }
+
+    public int minDepthRecursive(TreeNode root) {
+        if (root == null) return 0;
+        if (root.left == null && root.right == null) return 1;
+
+        int res = Integer.MAX_VALUE;
+        if (root.left != null) {
+            res = Math.min(res, minDepthRecursive(root.left) + 1);
+        }
+        if (root.right != null) {
+            res = Math.min(res, minDepthRecursive(root.right) + 1);
+        }
+        return res;
+    }
+
     public int minDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -48,8 +86,11 @@ public class LC111 {
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(0);
+        TreeNode root = new TreeNode(1);
+        TreeNode node = new TreeNode(2);
 
-        System.out.println(new LC111().minDepth(root));
+        root.left = node;
+
+        System.out.println(new LC111().minDepthFinal(root));
     }
 }
