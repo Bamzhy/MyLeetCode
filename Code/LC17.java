@@ -11,26 +11,27 @@ import java.util.List;
  * Note that 1 does not map to any letters.
  */
 public class LC17 {
-    static String[] letterMap = {" ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    static String[] map = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    static List<String> res;
 
-    List<String> res;
-
-    public List<String> letterCombinations(String digits) {
+    public List<String> letterCombinationsRepeat(String digits) {
         res = new ArrayList<>();
-        if (digits == null || digits.length() == 0) return res;
-        findCombination(digits, 0, "");
+        if (digits == null || digits.length() == 0)
+            return res;
+        generateCombination(digits, 0, "");
+        System.out.println(res);
         return res;
     }
 
-    private void findCombination(String digits, int index, String s) {
+    private void generateCombination(String digits, int index, String s) {
         if (index == digits.length()) {
             res.add(s);
             return;
         }
-        char c = digits.charAt(index);
-        String letters = letterMap[c - '0'];
-        for (int i = 0; i < letters.length(); i++) {
-            findCombination(digits, index + 1, s + letters.charAt(i));
+
+        String letter = map[digits.charAt(index) - '0'];
+        for (int i = 0; i < letter.length(); i++) {
+            generateCombination(digits, index + 1, s + letter.charAt(i));
         }
     }
 
@@ -57,8 +58,28 @@ public class LC17 {
 //        System.out.println("--------digits[" + index + "] = " + c + " is complete, then we return --------");
 //    }
 
+
+    public List<String> letterCombinations(String digits) {
+        res = new ArrayList<>();
+        if (digits == null || digits.length() == 0) return res;
+        findCombination(digits, 0, "");
+        return res;
+    }
+
+    private void findCombination(String digits, int index, String s) {
+        if (index == digits.length()) {
+            res.add(s);
+            return;
+        }
+        char c = digits.charAt(index);
+        String letters = map[c - '0'];
+        for (int i = 0; i < letters.length(); i++) {
+            findCombination(digits, index + 1, s + letters.charAt(i));
+        }
+    }
+
     public static void main(String[] args) {
-        new LC17().letterCombinations("234");
+        new LC17().letterCombinationsRepeat("234");
     }
 
     // a failed attempt of violent solution
@@ -69,7 +90,7 @@ public class LC17 {
         ArrayList<char[]> temp = new ArrayList<>();
         for (int i = 0; i < digits.length(); i++) {
             char c = digits.charAt(i);
-            String letter = letterMap[c - '0'];
+            String letter = map[c - '0'];
             char[] tempChar = new char[letter.length()];
             for (int j = 0; j < letter.length(); j++) {
                 tempChar[j] = letter.charAt(j);
