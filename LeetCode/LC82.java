@@ -1,6 +1,6 @@
 package com.bamzhy.My_LeetCode.LeetCode;
 
-import com.bamzhy.My_LeetCode.ListNode;
+import com.bamzhy.My_LeetCode.Pojo.ListNode;
 
 /**
  * Given a sorted linked list, delete all nodes that have duplicate numbers,
