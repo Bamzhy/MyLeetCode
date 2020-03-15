@@ -27,13 +27,20 @@ public class tof03 {
 
     // 利用长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内 这个条件
     public int findRepeatNumber2(int[] nums) {
+        if (nums == null || nums.length <= 0)
+            return 0;
+        for (int num : nums) {
+            if (num < 0 || num > nums.length - 1) {
+                return 0;
+            }
+        }
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] == nums[nums[i]])
-                return nums[i];
-            else {
-                int temp = nums[nums[i]];
-                nums[nums[i]] = nums[i];
-                nums[i] = temp;
+            while (nums[i] != i) {
+                if (nums[i] == nums[nums[i]])
+                    return nums[i];
+                int temp = nums[i];
+                nums[i] = nums[temp];
+                nums[temp] = temp;
             }
         }
         return 0;
