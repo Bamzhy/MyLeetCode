@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class TreeNodeUtils {
 
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public static String serialize(TreeNode root) {
         if (root == null) return "";
         StringBuilder sb = new StringBuilder();
         LinkedList<TreeNode> queue = new LinkedList<>();
@@ -24,7 +24,7 @@ public class TreeNodeUtils {
     }
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public static TreeNode deserialize(String data) {
         if (data == null || data.length() == 0) return null;
 
         String[] values = data.split(",");
@@ -51,7 +51,7 @@ public class TreeNodeUtils {
         return root;
     }
 
-    private TreeNode createNode(String value) {
+    private static TreeNode createNode(String value) {
         if (value == null || value.equals("null"))
             return null;
         else
