@@ -33,21 +33,24 @@ public class tof06 {
     }
 
     public int[] reversePrint2(ListNode head) {
-        Stack<Integer> stack = new Stack<>();
-        int[] res;
-        while (head != null) {
+        ListNode node = head;
+        int i = 0, j = 0;
+        while (node != null) {
+            node = node.next;
+            i++;
+        }
 
+        if (i == 0) return new int[0];
+
+        int[] temp = new int[i];
+        int[] res = new int[i];
+        while (head != null) {
+            temp[j++] = head.val;
             head = head.next;
         }
 
-        if (stack.size() == 0)
-            res = new int[0];
-        else {
-            int i = 0;
-            res = new int[stack.size()];
-            while (stack.size() > 0) {
-                res[i++] = stack.pop();
-            }
+        for (int k = temp.length - 1, a = 0; k >= 0; k--, a++) {
+            res[a] = temp[k];
         }
         return res;
     }
