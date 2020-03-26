@@ -33,6 +33,22 @@ public class tof10_1 {
         return array[n];
     }
 
+    public int fib3(int n) {
+        if (n <= 0)
+            return 0;
+        if (n == 1)
+            return 1;
+        int temp0 = 0;
+        int temp1 = 1;
+        int res = 0;
+        for (int i = 2; i <= n; i++) {
+            res = temp0 + temp1;
+            temp0 = temp1;
+            temp1 = res;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         tof10_1 tof10_1 = new tof10_1();
         System.out.println(tof10_1.fib2(48));
